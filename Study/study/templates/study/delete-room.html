@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% comment %} request.META>HTTP_REFERER = is used to go just one step back {% endcomment %}
+
+{% block content %}
+<form  action=""  method="POST">
+    {% csrf_token %}
+    <h3>Are you sure you want to delete '{{room}}' ?</h3>
+
+
+    <a  href="{{request.META.HTTP_REFERER}}">Go Back</a>
+    <input type="submit"  value="Confirm">
+    
+</form>
+
+{% endblock content%}
