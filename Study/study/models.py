@@ -12,7 +12,7 @@ a user can have multiple messages = so in vthe messages class we have to make a 
 a Topic can have multiple rooms   = so here in the Room class we define topic column for setting one to many relatioship
 '''
 
-
+# model for room topic 
 class Topic(models.Model):
     topic=models.CharField(max_length=200)
     
