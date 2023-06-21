@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions',         # it is built app = it is a database table which stored loin/logout sesson
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'study.apps.StudyConfig'       # added study app here

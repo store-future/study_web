@@ -1,2 +1,16 @@
-<a href="/">Logo</a>
+<h1><a href="/">Logo</a></h1>
 <hr>
+
+{% comment %} IMPORTANT for search bar form
+here GET will automatically generate(?) a key-value pair where key is input's 
+attibute name so it is saving those values which is written in seacrh bar rightafter the q= and sending
+this value of key into Home function  
+{% endcomment %}
+
+<form    action="{% url 'home' %}"   method="GET" >
+    <input  type="text"  name="q"  placeholder="Search Rooms..." >
+ 
+ </form>
+
+
+ 
