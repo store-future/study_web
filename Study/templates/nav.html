@@ -1,5 +1,7 @@
+
+<div>
 <h1><a href="/">Logo</a></h1>
-<hr>
+
 
 {% comment %} IMPORTANT for search bar form
 here GET will automatically generate(?) a key-value pair where key is input's 
@@ -8,9 +10,18 @@ this value of key into Home function
 {% endcomment %}
 
 <form    action="{% url 'home' %}"   method="GET" >
+    
     <input  type="text"  name="q"  placeholder="Search Rooms..." >
  
  </form>
 
+{% if request.user.is_authenticated %}
+ <a  href="logout">Logout</a>
+ {% else %}
+ <a  href="login">Login</a>
+ <a  href="register">SignUp</a>
+{% endif %}
+ <hr>
 
- 
+
+</div>

@@ -17,41 +17,42 @@
 <div class="home-container">
 
    <div>
-      <h3>Browse Topics</h3>
-      <hr>
-
-
+         <h3>Browse Topics</h3>
+         <hr>
       <div>
          <a  href="{% url 'home'%}">All</a>
       </div>
       
-      {% for topic in topics %}
+         {% for topic in topics %}
       <div>
          <a  href="{% url 'home'%}?q={{topic.topic}}">{{topic.topic}}</a>
-       
       </div>
-  
-      {% endfor %}
-   
+         {% endfor %}  
    </div>
 
+
+
    <div>
-      <h3>{{room_count}} Rooms avialable</h3>
-      <a href="{% url 'create-room' %}">Create Room</a>
-      <hr>   
+         <h3>{{room_count}} Rooms avialable</h3>
+         <a href="{% url 'create-room' %}">Create Room</a>
+         <hr>   
       <div>
-         {% for room in rooms %}
+            {% for room in rooms %}
          <div>
+
+            {% if request.user == room.host %}
             <a href="{% url 'update-room' room.id %}">Update</a>
             <a href="{% url 'delete-room' room.id %}"> Delete</a>
+            {% endif %}
+
             <span>@{{room.host.username}}</span>
             <h3>{{room.id}}--<a href="{% url 'room' room.id%}">{{room.name}}</a></h3> 
             <small>{{room.topic.topic}}</small>
             <hr>
          </div>
-         {% endfor %}
+            {% endfor %}
       </div>      
-    </div>
+   </div>
 
 </div>
 
