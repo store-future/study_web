@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Room
+from .models import *
 from .form import RoomForm
 from django.db.models import Q   # Q is a djago inbuit class which allow us to use IF/ELSE python statement 
 from django.contrib.auth.models import User       #django builtin user model
@@ -19,7 +19,7 @@ def loginuser(request):
     page='login'
     
     
-    if request.user.is_authenticated:     # if user is already loggin in then thi condition  stops him to re-login
+    if request.user.is_authenticated:     # if user is already logged in then thi condition  stops him to re-login
         return redirect('home')
     
     if request.method=="POST":
@@ -106,11 +106,20 @@ def home(request):
     return render(request,"study/home.html" ,context )
 
 
+
+
+
 # displaying all the rooom description in each room section
 def room(request,id):
     room=Room.objects.get(pk=id)
-    context = {"room":room}
+    
+    room_message = room.message_set.all().order_by('-created')      # sytax = parentmodel.childmodel_set.all()  it is giving us a set of all messagemodel that are related to that specific room (note- here we write Message model in lower case with underscore set)
+    context = {"room":room , "room_messages":room_message}
     return render(request,"study/room.html",context)
+
+
+
+
 
 
 # creating new room
