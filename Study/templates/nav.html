@@ -15,10 +15,10 @@ this value of key into Home function
 
 {% if request.user.is_authenticated %}
 <h2>Hello {{user.username}}</h2>
- <a  href="logout">Logout</a>
+ <a  href="/logout">Logout</a>
  {% else %}
- <a  href="login">Login</a>
- <a  href="register">SignUp</a>
+ <a  href="/login">Login</a>
+ <a  href="/register">SignUp</a>
 {% endif %}
  <hr>
 

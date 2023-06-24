@@ -2,38 +2,54 @@
 
 
 {% block content %}
+<style>
+    .room-container{
+        display : grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
 
 
-
-
-<div>  
-    <h1>Name of room : {{room.name}}</h1>
-    <h1>Description of room : {{room.description}}</h1>  
-</div>
-
-
-<div class="comment-wrap">  
-    <h3>Convesations</h3>
-    <hr>
-
-    {% for message in room_messages %}
-        <div>
-            <small>@{{message.user}}  {{message.created | timesince}} ago</small>
-            <p> {{message.body}} </p>
+<div class="room-container">
+    
+    <div>
+        <h1>Name of room : {{room.name}}</h1>
+        <h1>Description of room : {{room.description}}</h1>
+        
+        <div class="comment-wrap">
+            <h3>Convesations</h3>
             <hr>
+         
+            {% for message in room_messages %}
+            <div>
+                {% if request.user == message.user %}
+                <a  href="{% url 'delete-message' message.id %}">Delete</a>
+                {% endif %}
+                <small>@{{message.user}} {{message.created | timesince}} ago</small>
+                <p> {{message.body}} </p>
+                <hr>
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+
+        {% if request.user.is_authenticated%}
+        <div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" name="body" placeholder="Write your message here.....">
+
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+
+    <div>
+        <h3>Participants</h3>
+        <hr>
+    </div>
 </div>
 
-
-
-<div>
-
-</div>
 
 
 {% endblock content %}
-
-
-
-

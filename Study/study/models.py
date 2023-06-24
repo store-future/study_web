@@ -46,5 +46,13 @@ class Message(models.Model):
     update  = models.DateTimeField(auto_now=True)                  # auto_now updates add timestamp  every time we update the model
     created = models.DateTimeField(auto_now_add=True)              # while auto_now_add only add timestamp once it changes  never
     
+    
+    class Meta:
+        ordering = ['-update' , '-created']
+        
+        
     def __str__(self):
         return self.body[:50]
+    
+    
+   
