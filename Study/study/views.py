@@ -113,7 +113,7 @@ def home(request):
     room_count= rooms.count()     # count gives length of th query sets  (so room models is here a query set )
     
     
-    # 3-it is displaying all the recent activity section into home 
+    # 3-it is displaying all the recent activity section into home (means display all the recent messages by any user over whole web)
     room_message = Message.objects.filter(Q(room__topic__topic__icontains=q))  # if it receives q value then show message accoding to that otherwise show all the messages in new first order
 
     
@@ -129,8 +129,12 @@ def home(request):
 
 
 
-
-# displaying all the information inside of a specific  rooom 
+'''IMPORTANT for room 
+displaying all the information inside of a specific  rooom -
+1-showing specific room name and descrition 
+2-showing all messages releted to specific room 
+3- creating new message by taking input from user into specific room
+'''
 def room(request,id):
     room=Room.objects.get(pk=id)                                    
     room_message = room.message_set.all().order_by('-created')      # sytax = parentmodel.childmodel_set.all()  it is giving us a set of all messagemodel that are related to that specific room (note- here we write Message model in lower case with underscore set)
@@ -147,7 +151,9 @@ def room(request,id):
         return redirect('room' , id=room.pk)     # here id is sent to our room redirection
        
    
-    context = {"room":room , "room_messages":room_message}
+    context = {"room":room , 
+               "room_messages":room_message,
+            }
     return render(request,"study/room.html",context)
 
 
@@ -155,10 +161,26 @@ def room(request,id):
 
 def userprofile(request,id):
     
+    # displaying all the topics 
+    topic = Topic.objects.all()
+    
+    
     # displaying all the rooms releted to specific user
     user = User.objects.get(pk=id)
-    rooms = host.room_set.all()
-    return render(request,"study/profile.html")
+    room = user.room_set.all()
+    
+    
+    # displaying all the comments done by specific user
+    user_message = user.message_set.all()
+    
+    
+    
+    context = {"user":user    ,
+               "rooms":room   , 
+               "topics":topic ,
+               "room_messages":user_message
+            }
+    return render(request,"study/profile.html" , context)
 
 
 
