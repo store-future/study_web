@@ -22,4 +22,3 @@ def AddTodo(request):
         return Response(serializer.data , status.HTTP_201_CREATED)
     return Response(serializer.data , status = status.HTTP_400_BAD_REQUEST)
 
-

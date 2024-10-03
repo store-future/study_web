@@ -52,8 +52,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',                           # configure middleware for cors 
+    'corsheaders.middleware.CorsMiddleware',                        # add middleware                   # configure middleware for cors 
 ]
+
 
 CORS_ALLOW_ALL_ORIGINS = True                                       # allowing domain list to make cross site request
 
